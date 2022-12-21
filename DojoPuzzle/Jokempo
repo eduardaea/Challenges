@@ -1,0 +1,56 @@
+let choices = ['Pedra', 'Papel', 'Tesoura']
+
+
+let randomElement1 = choices[Sortear()];
+let randomElement2 = choices[Sortear()];
+
+function Sortear() :number {
+  return Math.floor(Math.random() * choices.length);
+}
+
+
+function Play(a:string,b:string){
+
+  if(a===b){
+    console.log("\n",a," e ",b)
+    console.log("EMPATE!")
+  }
+  switch(a){
+    case 'Pedra':  
+      if(b === 'Papel'){
+        console.log("Entre",a," e ",b,"Teremos...")
+        console.log(b,"GANHOU!")
+      }
+      else if(b === 'Tesoura'){
+        console.log("Entre",a," e ",b,"Teremos...")
+        console.log(a,"GANHOU!")
+      }
+    break;
+      
+    case 'Papel':
+      if(b === 'Pedra'){
+        console.log("\n","Entre",a," e ",b,"Teremos...")
+        console.log(a,"GANHOU!")
+      }
+      else if(b === 'Tesoura'){
+        console.log("\n","Entre",a," e ",b,"Teremos...")
+        console.log(b,"GANHOU!")
+      }
+    break;
+      
+    case 'Tesoura':
+      if(b === 'Papel'){
+        console.log("\n","Entre",a," e ",b,"Teremos...")
+        console.log(a,"GANHOU!")
+      }
+      else if(b === 'Pedra'){
+        console.log("\n","Entre",a," e ",b,"Teremos...")
+        console.log(b,"GANHOU!")
+      }
+    break;
+      
+  }
+    
+}
+
+Play(randomElement1,randomElement2)
