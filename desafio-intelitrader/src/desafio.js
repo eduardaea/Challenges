@@ -2,6 +2,8 @@ import { Produto } from '../model/produto.model.js'
 import { Venda } from '../model/venda.model.js'
 import fs from 'fs';
 import { Transfere } from './relatorios/transfere.js';
+import { Diverge } from './relatorios/diverge.js';
+import { Canal } from './relatorios/totcanais.js';
 
 let data;
 let produtos_array;
@@ -37,11 +39,16 @@ for(let i=0; i<vendas_array.length; i++){
 }
 
 let transfere = new Transfere();
+let diverge = new Diverge();
+let canais_status = new Canal()
 
-// console.log(estoque_produtos)
-// console.log(vendas_produtos)
 
-console.log(transfere.transferencia(estoque_produtos,vendas_produtos))
+
+//console.log(transfere.transferencia(estoque_produtos,vendas_produtos))
+
+//console.log(diverge.divergencias(estoque_produtos,vendas_produtos))
+
+console.log(canais_status.canais(vendas_produtos))
 
 
 
