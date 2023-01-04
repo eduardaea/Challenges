@@ -46,11 +46,11 @@ export class Canal{
         }
 
         try {
-            fs.writeFileSync('./TOTCANAIS.TXT.', impressao);
+            fs.writeFileSync('./TOTCANAIS.TXT', impressao);
             // file written successfully
-          } catch (err) {
+        } catch (err) {
             console.error(err);
-          }
+        }
           
     }
 

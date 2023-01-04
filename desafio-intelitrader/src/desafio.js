@@ -42,7 +42,9 @@ let transfere = new Transfere();
 let diverge = new Diverge();
 let canais_status = new Canal()
 
-canais_status.canais(vendas_produtos);
+//TESTAR TOTCANAIS -- canais_status.canais(vendas_produtos);
+transfere.transferencia(estoque_produtos,vendas_produtos)
+//diverge.divergencias(estoque_produtos,vendas_produtos)
 
 //console.log(transfere.transferencia(estoque_produtos,vendas_produtos))
 

@@ -1,6 +1,8 @@
-
+import fs from 'fs';
 
 export class Transfere{
+
+    transferencias_array=[]
 
      transferencia(produtos,vendas) {
         for(let i=0; i<vendas.length;i++){
@@ -19,7 +21,8 @@ export class Transfere{
             }
            
         }    
-        return(produtos)
+        this.transferencias_array = produtos
+        this.imprime()
 
     } 
     
@@ -41,4 +44,65 @@ export class Transfere{
         }
     }
 
+    imprime(){
+        let impressao = 'Necessidade de Transfer�ncia Armaz�m para CO'
+        impressao = impressao + '\n\n';
+        impressao = impressao +'Produto  QtCO  QtMin  QtVendas  Estq.ap�s  Necess.  Transf. de\n'
+        impressao = impressao +'                                   Vendas            Arm p/ CO\n'
+        
+        for(let i=0; i<this.transferencias_array.length;i++){
+            let tam =0
+            
+            // COLUNA 1
+            impressao = impressao + `${this.transferencias_array[i].cod_produto}`
+            tam = this.transferencias_array[i].cod_produto.length
+            
+            // COLUNA 2
+            let espc = this.calc_espaco(13, tam, String(this.transferencias_array[i].qtd+this.transferencias_array[i].qtd_venda).length)
+            tam = tam + `${espc}${this.transferencias_array[i].qtd+this.transferencias_array[i].qtd_venda}`.length
+            impressao = impressao + `${espc}${this.transferencias_array[i].qtd+this.transferencias_array[i].qtd_venda}`
+
+            // COLUNA 3
+            espc = this.calc_espaco(20,tam,String(this.transferencias_array[i].qtd_min).length)
+            tam = tam + `${espc}${this.transferencias_array[i].qtd_min}`.length
+            impressao = impressao + `${espc}${this.transferencias_array[i].qtd_min}`
+
+
+            // COLUNA 4
+            espc = this.calc_espaco(30,tam,String(this.transferencias_array[i].qtd_venda).length)
+            tam = tam + `${espc}${this.transferencias_array[i].qtd_venda}`.length
+            impressao = impressao + `${espc}${this.transferencias_array[i].qtd_venda}`
+
+             // COLUNA 5
+             espc = this.calc_espaco(41,tam,String(this.transferencias_array[i].qtd).length)
+             tam = tam + `${espc}${this.transferencias_array[i].qtd}`.length
+             impressao = impressao + `${espc}${this.transferencias_array[i].qtd}`
+
+            // COLUNA 6
+            espc = this.calc_espaco(50,tam,String(this.transferencias_array[i].qtd_necess).length)
+            tam = tam + `${espc}${this.transferencias_array[i].qtd_necess}`.length
+            impressao = impressao + `${espc}${this.transferencias_array[i].qtd_necess}`
+            
+            // COLUNA 7
+            espc = this.calc_espaco(62,tam,String(this.transferencias_array[i].qtd_armazem_co).length)
+            tam = tam + `${espc}${this.transferencias_array[i].qtd_armazem_co}`.length
+            impressao = impressao + `${espc}${this.transferencias_array[i].qtd_armazem_co}\n`    
+    
+        }
+            
+        try {
+            fs.writeFileSync('./transfere.txt', impressao);
+        }catch (err) {
+                console.error(err);
+        }
+    }
+
+    calc_espaco(col,valor1,valor2){
+        let total = col-(valor1+valor2)
+        let esp=''
+        for(let i=0; i<total;i++){
+          esp=esp+' '  
+        }
+        return esp
+    }
 }
