@@ -42,7 +42,7 @@ let transfere = new Transfere();
 let diverge = new Diverge();
 let canais_status = new Canal()
 
-
+canais_status.canais(vendas_produtos);
 
 //console.log(transfere.transferencia(estoque_produtos,vendas_produtos))
 
@@ -51,15 +51,6 @@ let canais_status = new Canal()
 // console.log(canais_status.canais(vendas_produtos))
 
 
-const content = transfere.transferencia(estoque_produtos,vendas_produtos);
-
-try {
-  fs.writeFileSync('./transfere.txt', content);
-  // file written successfully
-} catch (err) {
-  console.error(err);
-}
-
-
+//const transferencia = transfere.transferencia(estoque_produtos,vendas_produtos);
 
 

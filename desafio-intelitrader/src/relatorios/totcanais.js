@@ -1,7 +1,9 @@
+import fs from 'fs';
 
 export class Canal{
     
-    canal_array = [0,0,0,0];
+    qtd_array = [0,0,0,0];
+    canal_array = ['1 - Representantes','2 - Website','3 - App m�vel Android','4 - App m�vel iPhone'];
     
     canais(vendas){
         for(let i=0; i<vendas.length;i++){
@@ -9,24 +11,55 @@ export class Canal{
              
                 
                 if(vendas[i].canal==="1"){
-                    this.canal_array[0]+= vendas[i].qtd_vendida
+                    this.qtd_array[0]+= vendas[i].qtd_vendida
                 }
                 else if(vendas[i].canal==="2"){
-                    this.canal_array[1]+= vendas[i].qtd_vendida
+                    this.qtd_array[1]+= vendas[i].qtd_vendida
                 }
                 else if(vendas[i].canal==="3"){
-                    this.canal_array[2]+= vendas[i].qtd_vendida
+                    this.qtd_array[2]+= vendas[i].qtd_vendida
                 }
                 else if(vendas[i].canal==="4"){
-                    this.canal_array[3]+= vendas[i].qtd_vendida
+                    this.qtd_array[3]+= vendas[i].qtd_vendida
                 }
                 
             }
            
-        }  
-        console.log(`1 - Representantes ${this.canal_array[0]}`)
-        console.log(`1 - Representantes ${this.canal_array[1]}`)
-        console.log(`1 - Representantes ${this.canal_array[2]}`)
-        console.log(`1 - Representantes ${this.canal_array[3]}`)
+        }
+
+        this.imprime();
+    }
+
+    imprime() {
+
+
+        let impressao = 'Quantidades de Vendas por canal';
+        impressao = impressao + '\n\n';
+        impressao = impressao + 'Canal                  QtVendas\n';
+
+        for(let i=0; i<this.qtd_array.length; i++ ){
+            
+            let espc=this.calc_espaco(this.canal_array[i].length,String(this.qtd_array[i]).length)
+            impressao = impressao + this.canal_array[i] + espc + this.qtd_array[i]+'\n'
+
+
+        }
+
+        try {
+            fs.writeFileSync('./TOTCANAIS.TXT.', impressao);
+            // file written successfully
+          } catch (err) {
+            console.error(err);
+          }
+          
+    }
+
+    calc_espaco(valor1, valor2){
+        let espc = ''   
+        let tam=31-(valor1+valor2)
+        for(let i=0; i<tam;i++){
+            espc=espc+" ";
+        }
+        return espc
     }
 }
