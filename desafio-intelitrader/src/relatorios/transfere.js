@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { FileHandler } from '../utils/file-handler';
 
 export class Transfere{
 
@@ -90,11 +91,8 @@ export class Transfere{
     
         }
             
-        try {
-            fs.writeFileSync('./transfere.txt', impressao);
-        }catch (err) {
-                console.error(err);
-        }
+        FileHandler.writeFile('./transfere.txt', impressao)
+    
     }
 
     calc_espaco(col,valor1,valor2){

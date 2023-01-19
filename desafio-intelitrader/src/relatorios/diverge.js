@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { FileHandler } from '../utils/file-handler';
 
 export class Diverge{
     
@@ -26,7 +26,6 @@ export class Diverge{
             }
            
         }  
-        // return this.divergencias_array  
         this.imprime()
     }
 
@@ -36,11 +35,7 @@ export class Diverge{
             impressao = impressao + this.divergencias_array[i] +'\n'
         }
 
+        FileHandler.writeFile('./divergencias.txt',impressao)
 
-        try {
-            fs.writeFileSync('./divergencias.txt', impressao);
-        }catch (err) {
-                console.error(err);
-        }
     }
 }

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { FileHandler } from '../utils/file-handler';
 
 export class Canal{
     
@@ -45,12 +46,7 @@ export class Canal{
 
         }
 
-        try {
-            fs.writeFileSync('./TOTCANAIS.TXT', impressao);
-            // file written successfully
-        } catch (err) {
-            console.error(err);
-        }
+        FileHandler.writeFile('./TOTCANAIS.TXT',impressao)
           
     }
 

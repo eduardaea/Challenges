@@ -4,6 +4,7 @@ import fs from 'fs';
 import { Transfere } from './relatorios/transfere.js';
 import { Diverge } from './relatorios/diverge.js';
 import { Canal } from './relatorios/totcanais.js';
+import { FileHandler } from './utils/file-handler.js';
 
 let data;
 let produtos_array;
@@ -12,20 +13,13 @@ let estoque_produtos = []
 let vendas_array;
 let vendas_produtos= [];
 
-try {
-  data = fs.readFileSync('../Casodeteste1/c1_produtos.txt', 'utf8');
-  produtos_array=data.split("\n");
-} catch (err) {
-  console.error(err);
-}
 
-try {
-    data = fs.readFileSync('../Casodeteste1/c1_vendas.txt', 'utf8');
-    vendas_array=data.split("\n");
-  } catch (err) {
-    console.error(err);
-  }
+data = FileHandler.readFile('../Casodeteste1/c1_produtos.txt')
+produtos_array=data.split("\n");
 
+data = FileHandler.readFile('../Casodeteste1/c1_vendas.txt')
+vendas_array=data.split("\n");
+  
 for(let i=0; i<produtos_array.length; i++){
     const produto_string = produtos_array[i].split(";");
     const produto = new Produto(produto_string[0],parseInt(produto_string[1]),parseInt(produto_string[2]))
@@ -42,17 +36,9 @@ let transfere = new Transfere();
 let diverge = new Diverge();
 let canais_status = new Canal()
 
-//TESTAR TOTCANAIS -- canais_status.canais(vendas_produtos);
+//canais_status.canais(vendas_produtos);
 transfere.transferencia(estoque_produtos,vendas_produtos)
 //diverge.divergencias(estoque_produtos,vendas_produtos)
 
-//console.log(transfere.transferencia(estoque_produtos,vendas_produtos))
-
-//console.log(diverge.divergencias(estoque_produtos,vendas_produtos))
-
-// console.log(canais_status.canais(vendas_produtos))
-
-
-//const transferencia = transfere.transferencia(estoque_produtos,vendas_produtos);
 
 
